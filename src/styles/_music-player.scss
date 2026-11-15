@@ -1,0 +1,152 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+
+// Ambient Sound & Music Floating Controls
+.audio-floating-controls {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: $z-overlay;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .audio-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.95rem;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(251, 111, 146, 0.35);
+    border-radius: $radius-pill;
+    box-shadow: 0 4px 16px rgba(186, 104, 137, 0.14);
+    font-family: $font-sans;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: $color-rose-deep;
+    cursor: pointer;
+    transition: all 0.25s $ease-romantic;
+    outline: none;
+
+    &:hover {
+      background: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201, 24, 74, 0.22);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &.is-playing {
+      background: linear-gradient(135deg, rgba(255, 227, 232, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
+      border-color: $color-rose-deep;
+
+      .audio-equalizer {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 12px;
+
+        span {
+          width: 2.5px;
+          background: $color-rose-deep;
+          border-radius: 1px;
+          animation: equalizerBar 0.9s ease-in-out infinite alternate;
+
+          &:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+          &:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+          &:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+        }
+      }
+    }
+  }
+
+  .nav-pill-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(251, 111, 146, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-secondary;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: $color-rose-deep;
+      background: #ffffff;
+      transform: scale(1.08);
+    }
+  }
+}
+
+// Stage Tracker Dots (Bottom indicator)
+.romantic-stage-tracker {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $z-overlay;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 111, 146, 0.25);
+  border-radius: $radius-pill;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  .tracker-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(201, 24, 74, 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s $ease-romantic;
+
+    &.active {
+      width: 22px;
+      border-radius: 4px;
+      background: $color-rose-deep;
+    }
+
+    &:hover:not(.active) {
+      background: rgba(201, 24, 74, 0.5);
+    }
+  }
+}
+
+// Custom Cursor (Only on non-touch devices)
+@media (hover: hover) and (pointer: fine) {
+  .sparkle-cursor-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: $z-cursor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out, opacity 0.3s ease;
+    opacity: 0.85;
+
+    .cursor-heart {
+      color: $color-blush-500;
+      filter: drop-shadow(0 0 6px rgba(251, 111, 146, 0.6));
+    }
+  }
+}
+
+@keyframes equalizerBar {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}

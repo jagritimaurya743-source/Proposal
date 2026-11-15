@@ -1,0 +1,224 @@
+// ==========================================
+// MAIN STYLESHEET ENTRY POINT
+// ==========================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+@use 'floating-hearts';
+@use 'envelope';
+@use 'welcome';
+@use 'questions';
+@use 'love-letter';
+@use 'proposal';
+@use 'music-player';
+
+// Global Reset & Base
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-sans;
+  color: $color-text-primary;
+  background-color: $color-cream-base;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+// Background Romantic Ambient Glows
+.romantic-app-container {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-lg $spacing-md;
+  overflow: hidden;
+
+  // Background Gradient Orbs
+  .ambient-aurora-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: $z-background;
+    opacity: 0.65;
+    animation: auroraBreath 14s infinite alternate ease-in-out;
+
+    &.orb-blush {
+      top: -10%;
+      left: -5%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.55) 0%, rgba(255, 227, 232, 0) 70%);
+    }
+
+    &.orb-lavender {
+      bottom: -15%;
+      right: -5%;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(233, 213, 255, 0.55) 0%, rgba(243, 232, 255, 0) 70%);
+      animation-delay: -5s;
+    }
+
+    &.orb-rose {
+      top: 40%;
+      right: 25%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(251, 111, 146, 0.28) 0%, rgba(255, 240, 243, 0) 70%);
+      animation-delay: -9s;
+    }
+  }
+
+  // Main Content Card Anchor
+  .romantic-viewport {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: $z-content;
+  }
+}
+
+// Interactive Personalizer / Edit Modal (Floating corner trigger & modal)
+.personalize-toggle-btn {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: $z-overlay;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(251, 111, 146, 0.3);
+  border-radius: $radius-pill;
+  font-family: $font-sans;
+  font-size: 0.78rem;
+  color: $color-text-secondary;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $color-rose-deep;
+    border-color: $color-rose-deep;
+    background: #ffffff;
+    transform: translateY(-1px);
+  }
+}
+
+// Modal Backdrop & Card
+.personalize-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 24, 40, 0.45);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  @include flex-center;
+  padding: $spacing-md;
+  animation: fadeInSlideUp 0.25s ease-out;
+
+  .personalize-modal-card {
+    background: #ffffff;
+    border-radius: $radius-xl;
+    padding: $spacing-xl;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(251, 111, 146, 0.3);
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-sm;
+      border-bottom: 1px solid #f3e8ff;
+
+      h3 {
+        font-family: $font-display;
+        font-size: 1.35rem;
+        color: $color-text-primary;
+      }
+
+      .btn-close-modal {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: $color-text-muted;
+        &:hover { color: $color-rose-deep; }
+      }
+    }
+
+    .form-group {
+      margin-bottom: $spacing-md;
+
+      label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: $color-text-secondary;
+        margin-bottom: 0.3rem;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        border: 1.5px solid rgba(251, 111, 146, 0.35);
+        border-radius: $radius-md;
+        font-family: $font-sans;
+        font-size: 0.95rem;
+        color: $color-text-primary;
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: $color-rose-deep;
+          box-shadow: 0 0 0 3px rgba(251, 111, 146, 0.2);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: $spacing-sm;
+      margin-top: $spacing-lg;
+
+      .btn-cancel {
+        @include btn-secondary;
+        padding: 0.65rem 1.25rem;
+      }
+
+      .btn-save {
+        @include btn-romantic;
+        padding: 0.65rem 1.45rem;
+      }
+    }
+  }
+}

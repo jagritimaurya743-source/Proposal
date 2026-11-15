@@ -1,0 +1,147 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+
+.love-letter-screen {
+  @include flex-column-center;
+  min-height: 85vh;
+  padding: $spacing-xl $spacing-md;
+  text-align: center;
+  position: relative;
+  z-index: $z-content;
+  animation: fadeInSlideUp $duration-slow $ease-romantic forwards;
+
+  .letter-paper-wrapper {
+    position: relative;
+    max-width: 660px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  // Romantic Paper Card
+  .parchment-card {
+    background: linear-gradient(175deg, #fffdfa 0%, #fff6f8 100%);
+    border: 1px solid rgba(251, 111, 146, 0.35);
+    border-radius: $radius-lg;
+    box-shadow: 0 20px 50px rgba(164, 19, 60, 0.12), 0 6px 18px rgba(0, 0, 0, 0.04);
+    padding: $spacing-2xl $spacing-xl;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+
+    @include mobile-only {
+      padding: $spacing-xl $spacing-md;
+    }
+
+    // Vintage subtle decorative ruled border
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(224, 169, 109, 0.3);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    // Top ribbon / emblem
+    .letter-header-emblem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(251, 111, 146, 0.3);
+      padding-bottom: $spacing-md;
+      margin-bottom: $spacing-xl;
+
+      .letter-salutation {
+        font-family: $font-display;
+        font-size: 1.35rem;
+        font-style: italic;
+        color: $color-rose-deep;
+      }
+
+      .letter-stamp {
+        font-size: 1.5rem;
+        filter: drop-shadow(0 2px 4px rgba(201, 24, 74, 0.25));
+      }
+    }
+  }
+
+  // Letter Body & Typewriter Prose
+  .letter-prose-content {
+    font-family: $font-reading;
+    font-size: clamp(1.2rem, 3.4vw, 1.5rem);
+    line-height: 1.85;
+    color: $color-text-primary;
+    min-height: 160px;
+    position: relative;
+    letter-spacing: 0.01em;
+
+    .typed-text {
+      white-space: pre-line;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.25em;
+      background-color: $color-rose-deep;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: cursorBlink 0.8s infinite;
+    }
+  }
+
+  // Signoff & signature
+  .letter-signoff {
+    margin-top: $spacing-xl;
+    text-align: right;
+    padding-top: $spacing-md;
+    border-top: 1px dashed rgba(251, 111, 146, 0.25);
+
+    .signoff-intro {
+      font-family: $font-reading;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: $color-text-muted;
+    }
+
+    .signoff-signature {
+      font-family: $font-script;
+      font-size: 2.25rem;
+      color: $color-rose-deep;
+      line-height: 1;
+      margin-top: 0.25rem;
+    }
+  }
+
+  // Action controls
+  .letter-actions-bar {
+    margin-top: $spacing-2xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+
+    .btn-continue-proposal {
+      @include btn-romantic;
+      font-size: 1.1rem;
+      padding: 0.95rem 2.6rem;
+    }
+
+    .btn-read-instant {
+      background: none;
+      border: none;
+      font-family: $font-sans;
+      font-size: 0.85rem;
+      color: $color-text-muted;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $color-rose-deep;
+      }
+    }
+  }
+}

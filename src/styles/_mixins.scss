@@ -1,0 +1,148 @@
+@use 'variables' as *;
+
+// ==========================================
+// MIXINS & RESPONSIVE UTILITIES
+// ==========================================
+
+// Flexbox Centering
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Glassmorphism Card
+@mixin glass-card($radius: $radius-xl) {
+  background: $glass-bg;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $glass-border;
+  border-radius: $radius;
+  box-shadow: $glass-shadow;
+  transition: transform $duration-normal $ease-romantic,
+              box-shadow $duration-normal $ease-romantic,
+              border-color $duration-normal $ease-romantic;
+}
+
+// Romantic Primary Button
+@mixin btn-romantic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: 0.85rem 1.85rem;
+  font-family: $font-sans;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: $color-text-inverted;
+  background: linear-gradient(135deg, $color-rose-deep 0%, $color-blush-500 100%);
+  border: none;
+  border-radius: $radius-pill;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(201, 24, 74, 0.32), 0 2px 6px rgba(251, 111, 146, 0.2);
+  transition: all $duration-normal $ease-romantic;
+  user-select: none;
+  outline: none;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(201, 24, 74, 0.42), 0 4px 10px rgba(251, 111, 146, 0.28);
+    background: linear-gradient(135deg, $color-rose-crimson 0%, $color-blush-400 100%);
+  }
+
+  &:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 12px rgba(201, 24, 74, 0.25);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(251, 111, 146, 0.5), 0 8px 24px rgba(201, 24, 74, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Gentle Secondary Button
+@mixin btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: 0.85rem 1.75rem;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(251, 111, 146, 0.35);
+  border-radius: $radius-pill;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(186, 104, 137, 0.1);
+  transition: all $duration-normal $ease-romantic;
+  outline: none;
+
+  &:hover {
+    color: $color-rose-deep;
+    background: #ffffff;
+    border-color: rgba(201, 24, 74, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(186, 104, 137, 0.18);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(201, 24, 74, 0.3);
+  }
+}
+
+// Responsive Breakpoints
+@mixin mobile-only {
+  @media (max-width: 640px) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: 641px) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Accessibility: Reduced Motion
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+    @content;
+  }
+}

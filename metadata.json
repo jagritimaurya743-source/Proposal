@@ -1,0 +1,6 @@
+{
+  "name": "A Little Question for You 💗",
+  "description": "A beautiful, interactive romantic proposal experience with heartfelt storytelling, interactive questions, and romantic animations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

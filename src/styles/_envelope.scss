@@ -1,0 +1,236 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+
+.envelope-screen {
+  @include flex-column-center;
+  min-height: 85vh;
+  padding: $spacing-xl $spacing-md;
+  text-align: center;
+  position: relative;
+  z-index: $z-content;
+  animation: fadeInSlideUp $duration-slow $ease-romantic forwards;
+
+  .envelope-intro-kicker {
+    font-family: $font-sans;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-rose-deep;
+    margin-bottom: $spacing-sm;
+    opacity: 0.9;
+  }
+
+  .envelope-heading {
+    font-family: $font-display;
+    font-size: clamp(1.85rem, 5vw, 2.75rem);
+    font-weight: 600;
+    color: $color-text-primary;
+    line-height: 1.25;
+    margin-bottom: $spacing-2xl;
+    text-wrap: balance;
+
+    .sparkle-icon {
+      display: inline-block;
+      vertical-align: middle;
+      color: $color-gold-accent;
+      margin-left: 0.35rem;
+      animation: sparkleShimmer 2.2s infinite ease-in-out;
+    }
+  }
+
+  // Envelope 3D Stage
+  .envelope-stage {
+    position: relative;
+    width: 290px;
+    height: 195px;
+    margin: 0 auto $spacing-2xl;
+    perspective: 900px;
+    cursor: pointer;
+
+    @include tablet-up {
+      width: 340px;
+      height: 225px;
+    }
+
+    &:hover .heart-seal-wrapper {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  .envelope-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #fff7f9 0%, #ffdbe4 100%);
+    border-radius: $radius-sm;
+    box-shadow: 0 20px 45px rgba(201, 24, 74, 0.16), 0 6px 16px rgba(164, 19, 60, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    transition: transform $duration-normal $ease-romantic;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(251, 111, 146, 0.4);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+  }
+
+  // Top Flap (Rotates on Open)
+  .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: top center;
+    transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    z-index: 4;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 145px solid transparent;
+      border-right: 145px solid transparent;
+      border-top: 108px solid #fecdd8;
+      filter: drop-shadow(0 4px 6px rgba(164, 19, 60, 0.12));
+
+      @include tablet-up {
+        border-left-width: 170px;
+        border-right-width: 170px;
+        border-top-width: 122px;
+      }
+    }
+  }
+
+  // Bottom & Side Pocket Folds
+  .envelope-pocket {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: $radius-sm;
+
+    // Bottom triangle
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 145px solid transparent;
+      border-right: 145px solid transparent;
+      border-bottom: 110px solid #ffd8e2;
+
+      @include tablet-up {
+        border-left-width: 170px;
+        border-right-width: 170px;
+        border-bottom-width: 126px;
+      }
+    }
+  }
+
+  // Letter card inside envelope
+  .envelope-letter-card {
+    position: absolute;
+    top: 15px;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #fce7f3;
+    z-index: 2;
+    padding: $spacing-md;
+    @include flex-column-center;
+    transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+
+    .letter-preview-heart {
+      color: $color-rose-deep;
+      animation: heartPulse 1.8s infinite ease-in-out;
+    }
+
+    .letter-preview-text {
+      font-family: $font-reading;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: $color-text-secondary;
+      margin-top: 4px;
+    }
+  }
+
+  // Heart Wax Seal
+  .heart-seal-wrapper {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    transition: transform $duration-normal $ease-romantic, opacity 0.4s ease;
+
+    .heart-seal-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e63956 0%, #a4133c 70%, #590d22 100%);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 18px rgba(164, 19, 60, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+      @include flex-center;
+      color: #ffffff;
+      cursor: pointer;
+      outline: none;
+      animation: heartGlow 2.5s infinite ease-in-out;
+      transition: all $duration-normal ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+  // State: Opening Animation
+  &.is-opening {
+    .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .heart-seal-wrapper {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    .envelope-letter-card {
+      transform: translateY(-80px);
+      box-shadow: 0 20px 40px rgba(201, 24, 74, 0.22);
+    }
+  }
+
+  // Action Button Container
+  .envelope-actions {
+    margin-top: $spacing-md;
+
+    .btn-open-envelope {
+      @include btn-romantic;
+      font-size: 1.1rem;
+      padding: 0.95rem 2.25rem;
+    }
+
+    .envelope-tip {
+      font-size: 0.85rem;
+      color: $color-text-muted;
+      margin-top: $spacing-sm;
+    }
+  }
+}

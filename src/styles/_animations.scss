@@ -1,0 +1,167 @@
+@use 'variables' as *;
+
+// ==========================================
+// ROMANTIC ANIMATIONS & KEYFRAMES
+// ==========================================
+
+// Screen Transitions
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeOutSlideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
+// Gentle Floating effect
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+// Heart Beat / Pulse
+@keyframes heartPulse {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.18);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.12);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+// Heart Glow halo
+@keyframes heartGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(251, 111, 146, 0.45));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(201, 24, 74, 0.75));
+  }
+}
+
+// Sparkle Shimmer
+@keyframes sparkleShimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(45deg);
+  }
+}
+
+// Rose Petal Falling / Drifting
+@keyframes petalDrift {
+  0% {
+    transform: translate3d(0, -50px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(80px, 105vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+// Envelope 3D Flap Opening
+@keyframes openEnvelopeFlap {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 5;
+  }
+  100% {
+    transform: rotateX(180deg);
+    z-index: 1;
+  }
+}
+
+// Letter Slide Up out of envelope
+@keyframes letterRise {
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-60px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-90px);
+    opacity: 1;
+  }
+}
+
+// Ambient Background Aurora / Glow Shift
+@keyframes auroraBreath {
+  0% {
+    transform: scale(1) translate(0%, 0%);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.08) translate(3%, -3%);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1) translate(0%, 0%);
+    opacity: 0.75;
+  }
+}
+
+// Typewriter cursor blink
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+// Golden Ring / Rose Reveal
+@keyframes blossomScale {
+  0% {
+    transform: scale(0.7) rotate(-15deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
